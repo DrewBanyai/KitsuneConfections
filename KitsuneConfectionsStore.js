@@ -20,6 +20,7 @@ function LoadSiteContent() {
 	MainContent = document.getElementById("KitsuneConfections");
 	MainContent.style.width = "100%";
 	MainContent.style.margin = "-8px -8px 0px -8px";
+	MainContent.style.backgroundImage = "linear-gradient(to bottom right, rgb(10, 10, 10), rgb(70, 70, 70))";
 	console.log(MainContent);
 	
 	LoadPage(new MainPage(SiteWidth));

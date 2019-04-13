@@ -1,0 +1,27 @@
+class Label {
+	constructor(name, text, font, size, divType) {
+		this.LabelName = name;
+		this.LabelElement = null;
+		this.DivType = (divType !== undefined) ? divType : "span";
+		this.content = this.GenerateContent();
+		this.SetText(text);
+		this.SetFont(font);
+		this.SetFontSize(size);
+		
+	}
+	
+	GenerateContent() {
+		
+		
+		this.LabelElement = document.createElement(this.DivType);
+		this.LabelElement.id = this.LabelName + "Label";
+		
+		this.LabelElement.SetText = (text) => this.SetText(text);
+		
+		return this.LabelElement;
+	}
+	
+	SetText(text) { this.LabelElement.innerHTML = text; }
+	SetFont(font) { this.LabelElement.style.fontFamily = font; }
+	SetFontSize(size) { this.LabelElement.style.fontSize = size; }
+}

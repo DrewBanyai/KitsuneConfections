@@ -1,4 +1,4 @@
-class SiteHeader {
+class SiteFooter {
 	constructor(siteTitle) {
 		this.SiteTitle = siteTitle;
 		this.content = this.GenerateContent();
