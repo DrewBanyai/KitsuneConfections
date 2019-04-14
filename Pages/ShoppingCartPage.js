@@ -4,9 +4,6 @@ class ShoppingCartPage {
 	}
 	
 	GenerateContent() {
-		console.log("ShoppingCartPage");
-		console.log(ShoppingCartList);
-		
 		let container = document.createElement("div");
 		container.id = "MainPageContainer";
 		
