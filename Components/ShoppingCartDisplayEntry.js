@@ -10,6 +10,8 @@ class ShoppingCartDisplayEntry {
 	}
 	
 	GenerateContent() {
+		let centerMargin = "28px";
+		
 		let container = document.createElement("div");
 		container.id = "ShoppingCartDisplayEntry";
 		container.style.width = "100%";
@@ -33,14 +35,14 @@ class ShoppingCartDisplayEntry {
 		
 		let itemNameLabel = new Label("ItemName", this.ItemName, "'Ubuntu', sans-serif", "18px", "span");
 		itemNameLabel.content.style.color = "rgb(200, 200, 200)";
-		itemNameLabel.content.style.marginTop = "27px";
+		itemNameLabel.content.style.marginTop = centerMargin;
 		itemNameLabel.content.style.marginLeft = "20px";
 		itemNameLabel.content.style.width = "400px";
 		container.appendChild(itemNameLabel.content);
 		
 		let itemPriceLabel = new Label("ItemName", this.ItemPriceString, "'Ubuntu', sans-serif", "18px", "span");
 		itemPriceLabel.content.style.color = "rgb(220, 220, 220)";
-		itemPriceLabel.content.style.marginTop = "27px";
+		itemPriceLabel.content.style.marginTop = centerMargin;
 		itemPriceLabel.content.style.marginLeft = "20px";
 		itemPriceLabel.content.style.width = "100px";
 		container.appendChild(itemPriceLabel.content);
@@ -54,7 +56,7 @@ class ShoppingCartDisplayEntry {
 		countInput.style.width = "40px";
 		countInput.style.height = "20px";
 		countInput.style.textAlign = "right";
-		countInput.style.marginTop = "27px";
+		countInput.style.marginTop = centerMargin;
 		countInput.style.marginRight = "10px";
 		countInput.onchange = () => { this.ItemCount = countInput.value; SetShoppingCartItemCount(this.ItemName, parseInt(this.ItemCount)); this.SetItemTotalPrice(); };
 		container.appendChild(countInput);
@@ -63,7 +65,7 @@ class ShoppingCartDisplayEntry {
 		removeItemButton.content.style.width = "90px";
 		removeItemButton.content.style.height = "25px";
 		removeItemButton.content.style.cursor = "pointer";
-		removeItemButton.content.style.marginTop = "27px";
+		removeItemButton.content.style.marginTop = centerMargin;
 		removeItemButton.content.onclick = () => { 
 			this.ItemCount = 0;
 			SetShoppingCartItemCount(this.ItemName, parseInt(this.ItemCount));
@@ -73,7 +75,7 @@ class ShoppingCartDisplayEntry {
 		
 		this.TotalPriceLabel = new Label("ItemName", GetPriceString(this.ItemPrice * this.ItemCount), "'Ubuntu', sans-serif", "18px", "span");
 		this.TotalPriceLabel.content.style.color = "rgb(220, 220, 220)";
-		this.TotalPriceLabel.content.style.marginTop = "27px";
+		this.TotalPriceLabel.content.style.marginTop = centerMargin;
 		this.TotalPriceLabel.content.style.width = "150px";
 		this.TotalPriceLabel.content.style.textAlign = "right";
 		container.appendChild(this.TotalPriceLabel.content);

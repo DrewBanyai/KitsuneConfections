@@ -60,7 +60,7 @@ h2{
 
 /* Custom styles */
 .shoppingCartIconZoom {
-  transition: transform .1s; /* Animation */
+  transition: transform .3s; /* Animation */
 }
 
 .shoppingCartIconZoom:hover {
