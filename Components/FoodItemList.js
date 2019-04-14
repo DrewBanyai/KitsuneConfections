@@ -10,6 +10,7 @@ class FoodItemList {
 	GenerateContent() {
 		//  Outer container
 		let container = document.createElement("div");
+		container.id = "FoodItemList";
 		
 		return container;
 	}

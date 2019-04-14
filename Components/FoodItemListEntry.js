@@ -4,16 +4,19 @@ class FoodItemListEntry {
 		this.ItemName = itemName;
 		this.ItemPrice = itemPrice;
 		this.OnSaleTag = null;
+		this.HoverZoomRatio = 1.0;
 		this.content = this.GenerateContent();
 	}
 	
 	GenerateContent() {
-		let entryWidth = "240px";
+		let entryWidth = "286px";
 		let entryHeight = "240px";
 		let entryBoxShadow = "1px 3px 5px lightgray";
 		let previewImageHeight = "180px";
 		let borderRadius = "5px";
 		let entryMargin = "10px";
+		let maxHoverZoomRatio = 1.2;
+		let hoverZoomSpeed = 0.01;
 		
 		//  Outer container
 		let container = document.createElement("div");
@@ -38,7 +41,7 @@ class FoodItemListEntry {
 		container.appendChild(imageContainer);
 		
 		this.OnSaleTag = document.createElement("div");
-		this.OnSaleTag.className = "corner-ribbon FoodItemListEntry-sale sticky green shadow";
+		this.OnSaleTag.className = "corner-ribbon FoodItemListEntry-sale sticky orange shadow";
 		this.OnSaleTag.style.position = "relative";
 		this.OnSaleTag.style.display = "none";
 		this.OnSaleTag.innerHTML = "On Sale";
@@ -63,11 +66,20 @@ class FoodItemListEntry {
 		buttonTest.content.style.width = "100px";
 		buttonTest.content.style.height = "25px";
 		buttonTest.content.style.display = "flex";
+		buttonTest.SetOnClick(() => { 
+			AddToShoppingCart({name: this.ItemName, price: this.ItemPrice, count: 1 });
+			//LoadPage(new ShoppingCartPage());
+		});
 		addToCartPlusPriceContainer.appendChild(buttonTest.content);
 		
 		let itemPriceLabel = new Label("ItemPrice", this.ItemPrice, "'Titillium Web', sans-serif", "18px", "span");
 		itemPriceLabel.content.style.fontWeight = "bold";
 		addToCartPlusPriceContainer.appendChild(itemPriceLabel.content);
+		
+		//  The hover-over zoom (foodItemListEntryZoom)
+		container.onmouseover = () => {
+			container.className = "foodItemListEntryZoom";
+		}
 		
 		return container;
 	}

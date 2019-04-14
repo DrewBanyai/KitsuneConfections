@@ -52,10 +52,27 @@ h2{
   letter-spacing: 1px;
   color: #f0f0f0;
   transform: rotate(-45deg);
+  border-style: solid;
+  border-color: lightblue;
+  border-width: 1px;
   -webkit-transform: rotate(-45deg);
 }
 
 /* Custom styles */
+.shoppingCartIconZoom {
+  transition: transform .1s; /* Animation */
+}
+
+.shoppingCartIconZoom:hover {
+  transform: scale(1.08); /* (102% zoom) */
+}
+.foodItemListEntryZoom {
+  transition: transform .4s; /* Animation */
+}
+
+.foodItemListEntryZoom:hover {
+  transform: scale(1.05); /* (105% zoom) */
+}
 
 .corner-ribbon.sticky{
   position: fixed;
@@ -68,8 +85,8 @@ h2{
 /* Different positions */
 
 .corner-ribbon.FoodItemListEntry-sale{
-  left: -85px;
-  top: 10px;
+  left: -100px;
+  top: 15px;
   transform: rotate(-45deg);
   -webkit-transform: rotate(-45deg);
 }
@@ -108,13 +125,14 @@ h2{
 
 /* Colors */
 
-.corner-ribbon.white{background: #f0f0f0; color: #555;}
-.corner-ribbon.black{background: #333;}
-.corner-ribbon.grey{background: #999;}
-.corner-ribbon.blue{background: #39d;}
-.corner-ribbon.green{background: #2c7;}
-.corner-ribbon.turquoise{background: #1b9;}
-.corner-ribbon.purple{background: #95b;}
-.corner-ribbon.red{background: #e43;}
-.corner-ribbon.orange{background: #e82;}
-.corner-ribbon.yellow{background: #ec0;}
+.corner-ribbon.white{background: #f0f0f0; color: #50505;}
+.corner-ribbon.black{background: #303030;}
+.corner-ribbon.grey{background: #909090;}
+.corner-ribbon.blue{background: #3090d0;}
+.corner-ribbon.green{background: #20c070;}
+.corner-ribbon.turquoise{background: #10b090;}
+.corner-ribbon.purple{background: #9050b0;}
+.corner-ribbon.red{background: #e04030;}
+.corner-ribbon.orange{background: #e08020;}
+.corner-ribbon.yellow{background: #e0c000;}
+.corner-ribbon.darkred{background: rgb(160, 48, 36);}
