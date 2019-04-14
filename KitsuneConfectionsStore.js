@@ -45,8 +45,6 @@ function SetShoppingCartItemCount(itemName, itemCount) {
 	else {
 		entry.count = itemCount;
 		if (itemCount === 0) { ShoppingCartList = ShoppingCartList.filter(function(element) { return (element.count !== 0); }); }
-		console.log(itemCount);
-		console.log(ShoppingCartList);
 	}
 	UpdateShoppingCartIcon();
 }

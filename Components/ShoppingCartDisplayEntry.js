@@ -65,7 +65,6 @@ class ShoppingCartDisplayEntry {
 		removeItemButton.content.style.cursor = "pointer";
 		removeItemButton.content.style.marginTop = "27px";
 		removeItemButton.content.onclick = () => { 
-			console.log("REMOVING ITEM");
 			this.ItemCount = 0;
 			SetShoppingCartItemCount(this.ItemName, parseInt(this.ItemCount));
 			LoadPage(new ShoppingCartPage());
@@ -75,7 +74,7 @@ class ShoppingCartDisplayEntry {
 		this.TotalPriceLabel = new Label("ItemName", GetPriceString(this.ItemPrice * this.ItemCount), "'Ubuntu', sans-serif", "18px", "span");
 		this.TotalPriceLabel.content.style.color = "rgb(220, 220, 220)";
 		this.TotalPriceLabel.content.style.marginTop = "27px";
-		this.TotalPriceLabel.content.style.width = "160px";
+		this.TotalPriceLabel.content.style.width = "150px";
 		this.TotalPriceLabel.content.style.textAlign = "right";
 		container.appendChild(this.TotalPriceLabel.content);
 		
