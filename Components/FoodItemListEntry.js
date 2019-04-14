@@ -3,6 +3,7 @@ class FoodItemListEntry {
 		this.PreviewImageURL = previewImageURL;
 		this.ItemName = itemName;
 		this.ItemPrice = itemPrice;
+		this.ItemPriceString = GetPriceString(this.ItemPrice);
 		this.OnSaleTag = null;
 		this.HoverZoomRatio = 1.0;
 		this.content = this.GenerateContent();
@@ -65,14 +66,12 @@ class FoodItemListEntry {
 		let buttonTest = new PrimaryButton("AddToCart", "ADD TO CART", "'Titillium Web', sans-serif", "10px", "span");
 		buttonTest.content.style.width = "100px";
 		buttonTest.content.style.height = "25px";
-		buttonTest.content.style.display = "flex";
 		buttonTest.SetOnClick(() => { 
-			AddToShoppingCart({name: this.ItemName, price: this.ItemPrice, count: 1 });
-			//LoadPage(new ShoppingCartPage());
+			AddToShoppingCart({name: this.ItemName, count: 1, price: this.ItemPrice, previewURL: this.PreviewImageURL });
 		});
 		addToCartPlusPriceContainer.appendChild(buttonTest.content);
 		
-		let itemPriceLabel = new Label("ItemPrice", this.ItemPrice, "'Titillium Web', sans-serif", "18px", "span");
+		let itemPriceLabel = new Label("ItemPrice", this.ItemPriceString, "'Titillium Web', sans-serif", "18px", "span");
 		itemPriceLabel.content.style.fontWeight = "bold";
 		addToCartPlusPriceContainer.appendChild(itemPriceLabel.content);
 		

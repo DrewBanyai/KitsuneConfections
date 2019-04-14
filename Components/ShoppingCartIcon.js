@@ -3,6 +3,7 @@ class ShoppingCartIcon {
 		this.CountTag
 		this.CountLabel = null;
 		this.content = this.GenerateContent();
+		this.SetItemCount(CartItemCount);
 	}
 	
 	GenerateContent() {
@@ -34,7 +35,7 @@ class ShoppingCartIcon {
 		this.CountTag.style.padding = "0px 5px";
 		shoppingCartIcon.appendChild(this.CountTag);
 		
-		this.CountLabel = new Label("CountLabel", "1", "'Raleway', sans-serif", "11px", "div");
+		this.CountLabel = new Label("Count", "1", "'Raleway', sans-serif", "11px", "div");
 		this.CountLabel.content.style.color = "white";
 		this.CountLabel.content.style.fontWeight = "bold";
 		this.CountLabel.content.style.margin = "auto";
@@ -53,6 +54,6 @@ class ShoppingCartIcon {
 	
 	SetItemCount(count) {
 		this.CountLabel.SetText(count);
-		if (count === 0) { this.CountTag.style.display = "none"; return; }
+		this.CountTag.style.display = (count === 0) ? "none" : "flex";
 	}
 }

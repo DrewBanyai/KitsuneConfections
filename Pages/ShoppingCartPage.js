@@ -18,15 +18,8 @@ class ShoppingCartPage {
 		pageContent.style.borderRadius = "15px";
 		container.appendChild(pageContent);
 		
-		let foodItemList = new FoodItemList(3, SiteWidth);
-		foodItemList.AddFoodItem("images/ProductPreviews/ThinMintCakepops_01.png", "Thin Mint Cakepops", "$17.99");
-		foodItemList.AddFoodItem("images/ProductPreviews/UnicornCupcakes_01.png", "Unicorn Cupcakes", "$24.99", true);
-		foodItemList.AddFoodItem("images/ProductPreviews/PokeballCakepops_01.png", "Pokeball Cakepops", "$21.99");
-		foodItemList.AddFoodItem("images/ProductPreviews/MousseBitesWithRaspberry_01.png", "Mousse Bites (with raspberry)", "$14.99");
-		foodItemList.AddFoodItem("images/ProductPreviews/PumpkinCakepops_01.png", "Pumpkin Cakepops", "$19.99");
-		foodItemList.AddFoodItem("images/ProductPreviews/Tiramasu_01.png", "Tiramasu", "$21.99");
-		foodItemList.AddFoodItem("images/ProductPreviews/StarCakepops_01.png", "Star Cakepops", "$12.99", true);
-		pageContent.appendChild(foodItemList.content);
+		let shoppingCartDisplay = new ShoppingCartDisplay();
+		pageContent.appendChild(shoppingCartDisplay.content);
 		
 		let siteFooter = new SiteFooter();
 		container.appendChild(siteFooter.content);

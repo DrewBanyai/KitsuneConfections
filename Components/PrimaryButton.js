@@ -23,6 +23,7 @@ class PrimaryButton {
 		this.ButtonElement.style.height = "50px";
 		this.ButtonElement.style.borderRadius = "5px";
 		this.ButtonElement.style.backgroundColor = "orange";
+		this.ButtonElement.style.display = "flex";
 		
 		this.ButtonGradient = document.createElement(this.DivType);
 		this.ButtonGradient.id = this.ObjectName + "ButtonGradient";
@@ -30,15 +31,17 @@ class PrimaryButton {
 		this.ButtonGradient.style.height = "100%";
 		this.ButtonGradient.style.lineHeight = "25px";
 		this.ButtonGradient.style.borderRadius = "5px";
+		this.ButtonElement.style.display = "flex";
 		this.ButtonElement.appendChild(this.ButtonGradient);
 		
 		//  Create a centered label on the button
-		this.ButtonTextLabel = new Label(this.ObjectName + "ButtonTextLabel", "", "'Titillium Web', sans-serif", "20px", "div");
+		this.ButtonTextLabel = new Label(this.ObjectName + "ButtonText", "", "'Titillium Web', sans-serif", "20px", "div");
 		this.ButtonTextLabel.content.style.fontWeight = "bold";
 		this.ButtonTextLabel.content.style.position = "relative";
 		this.ButtonTextLabel.content.style.margin = "auto";
 		this.ButtonTextLabel.content.style.cursor = "default";
 		this.ButtonTextLabel.content.style.userSelect = "none";
+		this.ButtonTextLabel.content.style.textAlign = "center";
 		this.ButtonGradient.appendChild(this.ButtonTextLabel.content);
 		
 		//  Set mouse reactions
