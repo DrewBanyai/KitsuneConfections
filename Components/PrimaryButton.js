@@ -20,9 +20,9 @@ class PrimaryButton {
 		this.ButtonElement = document.createElement(this.DivType);
 		this.ButtonElement.id = this.ObjectName + "PrimaryButton";
 		this.ButtonElement.style.width = "200px";
-		this.ButtonElement.style.height = "50px";
+		this.ButtonElement.style.height = "25px";
 		this.ButtonElement.style.borderRadius = "5px";
-		this.ButtonElement.style.backgroundColor = "orange";
+		this.ButtonElement.style.backgroundImage = "linear-gradient(to right, rgb(255, 99, 0), rgb(255, 165, 0))";
 		this.ButtonElement.style.display = "flex";
 		
 		this.ButtonGradient = document.createElement(this.DivType);

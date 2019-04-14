@@ -6,6 +6,7 @@ class ShoppingCartDisplayEntry {
 		this.ItemPriceString = GetPriceString(this.ItemPrice);
 		this.TotalPriceLabel = null;
 		this.PreviewImageURL = previewImageURL;
+		this.UpdateCallback = null;
 		this.content = this.GenerateContent();
 	}
 	
@@ -50,7 +51,7 @@ class ShoppingCartDisplayEntry {
 		let countInput = document.createElement("input");
 		countInput.setAttribute("required", "");
 		countInput.setAttribute("type", "number");
-		countInput.setAttribute("min", "1");
+		countInput.setAttribute("min", "0");
 		countInput.setAttribute("data-store-cart-unit-quantity", "");
 		countInput.setAttribute("value", this.ItemCount);
 		countInput.style.width = "40px";
@@ -58,7 +59,13 @@ class ShoppingCartDisplayEntry {
 		countInput.style.textAlign = "right";
 		countInput.style.marginTop = centerMargin;
 		countInput.style.marginRight = "10px";
-		countInput.onchange = () => { this.ItemCount = countInput.value; SetShoppingCartItemCount(this.ItemName, parseInt(this.ItemCount)); this.SetItemTotalPrice(); };
+		countInput.onclick = () => countInput.onchange();
+		countInput.onchange = () => {
+			if (this.ItemCount === countInput.value) { return; }
+			SetShoppingCartItemCount(this.ItemName, parseInt(countInput.value));
+			this.SetItemCount(countInput.value);
+			if (container.ShoppingListCheck !== undefined) { container.ShoppingListCheck(); }
+		};
 		container.appendChild(countInput);
 		
 		let removeItemButton = new PrimaryButton("RemoveItem", "REMOVE ITEM", "'Titillium Web', sans-serif", "10px", "span");
@@ -80,7 +87,17 @@ class ShoppingCartDisplayEntry {
 		this.TotalPriceLabel.content.style.textAlign = "right";
 		container.appendChild(this.TotalPriceLabel.content);
 		
+		container.GetItemName = () => { return this.ItemName; };
+		
 		return container;
+	}
+	
+	GetItemName() { return this.ItemName; }
+	GetItemCount() { return this.ItemCount; }
+	
+	SetItemCount(count) {
+		this.ItemCount = count;
+		this.SetItemTotalPrice();
 	}
 	
 	SetItemTotalPrice() {

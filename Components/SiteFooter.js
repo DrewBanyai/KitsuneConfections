@@ -8,7 +8,7 @@ class SiteFooter {
 		container.id = "SiteFooter";
 		container.style.width = "100%";
 		container.style.height = "80px";
-		container.style.backgroundColor = "rgb(255, 100, 100)";
+		container.style.backgroundImage = "linear-gradient(to right, rgb(20, 10, 0), rgb(35, 17, 0))";
 		
 		let contentContainer = document.createElement("div");
 		contentContainer.id = "ContentContainer";
@@ -20,6 +20,7 @@ class SiteFooter {
 		container.appendChild(contentContainer);
 		
 		let siteTitleLabel = new Label("SiteTitle", SiteName, "'Titillium Web', sans-serif", "28px");
+		siteTitleLabel.content.style.color = "rgb(200, 200, 200)";
 		siteTitleLabel.content.style.position = "relative";
 		siteTitleLabel.content.style.top = "20px";
 		siteTitleLabel.content.style.cursor = "pointer";

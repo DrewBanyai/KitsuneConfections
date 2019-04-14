@@ -33,7 +33,7 @@ class ShoppingCartIcon {
 		this.CountTag.id = "CountTag";
 		this.CountTag.style.width = "fit-content";
 		this.CountTag.style.height = "14px";
-		this.CountTag.style.backgroundColor = "rgba(135, 206, 250, 0.85)";
+		this.CountTag.style.backgroundColor = "rgba(185, 25, 30, 0.95)";
 		this.CountTag.style.borderRadius = "15%";
 		this.CountTag.style.display = "flex";
 		this.CountTag.style.margin = "auto";

@@ -42,7 +42,9 @@ class FoodItemListEntry {
 		container.appendChild(imageContainer);
 		
 		this.OnSaleTag = document.createElement("div");
-		this.OnSaleTag.className = "corner-ribbon FoodItemListEntry-sale sticky orange shadow";
+		this.OnSaleTag.className = "corner-ribbon FoodItemListEntry-sale sticky shadow";
+		this.OnSaleTag.style.background = "rgb(224, 128, 32)";
+		this.OnSaleTag.style.fontFamily = "'Noto Sans', sans-serif";
 		this.OnSaleTag.style.position = "relative";
 		this.OnSaleTag.style.display = "none";
 		this.OnSaleTag.innerHTML = "On Sale";

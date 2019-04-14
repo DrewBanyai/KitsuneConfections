@@ -30,22 +30,26 @@ function LoadSiteContent() {
 	LoadPage(new MainPage());
 }
 
+function GetShoppingCartItemCount(itemName) {
+	let entry = ShoppingCartList.find(function(element) { return (element.name === itemName); });
+	return ((entry === undefined) ? 0 : entry.count);
+}
+
 function AddToShoppingCart(cartEntry) {
 	//  Create a new entry or tack the count onto an existing entry if one is already in the cart
 	let entry = ShoppingCartList.find(function(element) { return (element.name === cartEntry.name); });
-	if (entry === undefined) { ShoppingCartList.push(cartEntry); }
+	if (entry === undefined) { ShoppingCartList.push(cartEntry); UpdateShoppingCartIcon(); }
 	else { entry.count += cartEntry.count; }
+	
 	UpdateShoppingCartIcon();
 }
 
 function SetShoppingCartItemCount(itemName, itemCount) {
 	//  Create a new entry or tack the count onto an existing entry if one is already in the cart
 	let entry = ShoppingCartList.find(function(element) { return (element.name === itemName); });
-	if (entry === undefined) { console.log("ERROR: Attempted to update a shopping cart entry which does not exist (" + itemName + ")"); return; }
-	else {
-		entry.count = itemCount;
-		if (itemCount === 0) { ShoppingCartList = ShoppingCartList.filter(function(element) { return (element.count !== 0); }); }
-	}
+	if (entry === undefined) { console.log("ERROR: Attempted to update a shopping cart entry which does not exist (" + itemName + ", " + itemCount + ")"); return; }
+	else if ((entry.count = itemCount) === 0) { ShoppingCartList = ShoppingCartList.filter(function(element) { return (element.count !== 0); }); }
+	
 	UpdateShoppingCartIcon();
 }
 

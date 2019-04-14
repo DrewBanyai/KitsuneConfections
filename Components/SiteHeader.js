@@ -8,7 +8,7 @@ class SiteHeader {
 		container.id = "SiteHeader";
 		container.style.width = "100%";
 		container.style.height = "80px";
-		container.style.backgroundColor = "rgb(255, 100, 100)";
+		container.style.backgroundImage = "linear-gradient(to right, rgb(255, 99, 0), rgb(255, 165, 0))";
 		container.style.marginBottom = "5px";
 		
 		let contentContainer = document.createElement("div");
