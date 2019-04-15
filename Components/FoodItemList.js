@@ -26,12 +26,12 @@ class FoodItemList {
 		return rowContainer;
 	}
 	
-	AddFoodItem(imagePath, itemName, itemPrice, onSale = false) {
+	AddFoodItem(imagePath, itemName, itemPrice, onSale = false, originalPrice = "XXXXX") {
 		//  Grab the last row in the main container. Create a new one if it is time to do so.
 		let row = ((this.ItemCount % this.ItemsPerRow) == 0) ? this.AddNewRow() : this.LastRow;
 		
 		let foodEntry = new FoodItemListEntry(imagePath, itemName, itemPrice);
-		foodEntry.SetSaleStatus(onSale);
+		foodEntry.SetSaleStatus(onSale, originalPrice);
 		row.appendChild(foodEntry.content);
 		
 		this.ItemCount++;

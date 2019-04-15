@@ -4,6 +4,8 @@ class FoodItemListEntry {
 		this.ItemName = itemName;
 		this.ItemPrice = itemPrice;
 		this.ItemPriceString = GetPriceString(this.ItemPrice);
+		this.ItemOriginalPriceLabel = null;
+		this.ItemPriceLabel = null;
 		this.OnSaleTag = null;
 		this.HoverZoomRatio = 1.0;
 		this.content = this.GenerateContent();
@@ -73,19 +75,25 @@ class FoodItemListEntry {
 		});
 		addToCartPlusPriceContainer.appendChild(buttonTest.content);
 		
-		let itemPriceLabel = new Label("ItemPrice", this.ItemPriceString, "'Titillium Web', sans-serif", "18px", "span");
-		itemPriceLabel.content.style.fontWeight = "bold";
-		addToCartPlusPriceContainer.appendChild(itemPriceLabel.content);
+		this.ItemOriginalPriceLabel = new Label("ItemOriginalPrice", "XXXXX", "'Titillium Web', sans-serif", "14px", "span");
+		this.ItemOriginalPriceLabel.content.style.color = "rgba(130, 130, 130, 0.8)";
+		this.ItemOriginalPriceLabel.content.style.marginLeft = "50px";
+		addToCartPlusPriceContainer.appendChild(this.ItemOriginalPriceLabel.content);
+		
+		this.ItemPriceLabel = new Label("ItemPrice", this.ItemPriceString, "'Titillium Web', sans-serif", "18px", "span");
+		this.ItemPriceLabel.content.style.fontWeight = "bold";
+		addToCartPlusPriceContainer.appendChild(this.ItemPriceLabel.content);
 		
 		//  The hover-over zoom (foodItemListEntryZoom)
-		container.onmouseover = () => {
-			container.className = "foodItemListEntryZoom";
-		}
+		container.onmouseover = () => { container.className = "foodItemListEntryZoom"; }
 		
 		return container;
 	}
 	
-	SetSaleStatus(onSale) {
-		this.OnSaleTag.style.display = onSale ? "inline-block" : "hidden";
+	SetSaleStatus(onSale, originalPrice) {
+		this.OnSaleTag.style.display = onSale ? "inline-block" : "none";
+		this.ItemOriginalPriceLabel.SetText(originalPrice.strike());
+		this.ItemOriginalPriceLabel.content.style.display = onSale ? "inline-block" : "none";
+		this.ItemPriceLabel.content.style.color = onSale ? "rgb(10, 140, 10)" : "black";
 	}
 }
