@@ -67,16 +67,13 @@ class GooglePay {
 		if (price !== 0) { this.PrefetchPaymentRequest(); }
 	}
 	
-	PayButtonCallback() {
+	async PayButtonCallback() {
 		//  Load the payment data
-		GooglePaymentsClient.loadPaymentData(this.PaymentDataRequest).then(function(paymentData) {
-			//  If we're using gateway tokenization, pass this token without modification
-			this.PaymentToken = paymentData.paymentMethodData.tokenizationData.token;
-			console.log(`Payment Token: ${this.PaymentToken}`);
-		}).catch(function(error) {
-			// show error in developer console for debugging
-			console.error(error);
-		});
+		let paymentData = await GooglePaymentsClient.loadPaymentData(this.PaymentDataRequest).catch(function(error) { console.error(error); });
+		
+		//  If we're using gateway tokenization, pass this token without modification
+		this.PaymentToken = paymentData.paymentMethodData.tokenizationData.token;
+		console.log(`Payment Token: ${this.PaymentToken}`);
 	}
 	
 	PrefetchPaymentRequest() {
