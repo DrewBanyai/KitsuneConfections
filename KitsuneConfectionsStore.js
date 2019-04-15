@@ -6,6 +6,9 @@ let SiteWidth = "920px";
 let CartItemCount = 0;
 let ShoppingCartList = [];
 
+let GooglePayLoaded = false;
+let GooglePaymentsClient = null;
+
 function LoadPage(page) {
 	if (MainContent === null) {
 		console.log("MainContent is null! Can not load new page");
@@ -28,6 +31,13 @@ function LoadSiteContent() {
 	
 	//  Load the default first page users should see
 	LoadPage(new MainPage());
+			
+	let googlePayLoader = setInterval(() => {
+		if (GooglePayLoaded === true) {
+			GooglePaymentsClient = new google.payments.api.PaymentsClient({environment: 'TEST'});
+			clearInterval(googlePayLoader);
+		}
+	}, 50);
 }
 
 function GetShoppingCartItemCount(itemName) {
@@ -62,7 +72,8 @@ function UpdateShoppingCartIcon() {
 	if (shoppingCartIcon !== null) {  shoppingCartIcon.SetItemCount(CartItemCount); }
 }
 
-function GetPriceString(priceInPennies) {
+function GetPriceString(priceInPennies, addDollarSign = true) {
 	let float = parseFloat(priceInPennies / 100.0).toFixed(2);
-	return (`$${float}`);
+	let dollarSign = (addDollarSign ? "$" : "");
+	return (`${dollarSign}${float}`);
 }

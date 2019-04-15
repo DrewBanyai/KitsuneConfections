@@ -82,6 +82,12 @@ class ShoppingCartDisplay {
 		this.TotalDueAmountLabel.content.style.marginRight = "10px";
 		totalDueTextContainer.appendChild(this.TotalDueAmountLabel.content);
 		
+		this.GooglePay = new GooglePay();
+		this.GooglePay.content.style.marginTop = "6px";
+		this.GooglePay.content.style.display = "unset";
+		this.GooglePay.content.style.width = totalDueTextContainer.offsetWidth;
+		totalDueContainer.appendChild(this.GooglePay.content);
+		
 		return container;
 	}
 	
@@ -91,6 +97,7 @@ class ShoppingCartDisplay {
 			totalAmountDue += (element.price * element.count);
 		});
 		this.TotalDueAmountLabel.SetText(GetPriceString(totalAmountDue));
+		this.GooglePay.SetPaymentPrice(totalAmountDue);
 	}
 	
 	RemoveItemEntry(name) {
