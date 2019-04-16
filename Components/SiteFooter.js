@@ -7,7 +7,7 @@ class SiteFooter {
 		let container = document.createElement("div");
 		container.id = "SiteFooter";
 		container.style.width = "100%";
-		container.style.height = "80px";
+		container.style.height = `${SiteFooter.GetHeight()}px`;
 		container.style.backgroundImage = "linear-gradient(to right, rgb(20, 10, 0), rgb(35, 17, 0))";
 		
 		let contentContainer = document.createElement("div");
@@ -29,4 +29,6 @@ class SiteFooter {
 		
 		return container;
 	}
+	
+	static GetHeight() { return 80; }
 }

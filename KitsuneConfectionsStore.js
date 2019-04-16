@@ -26,8 +26,6 @@ function LoadPage(page) {
 function LoadSiteContent() {
 	MainContent = document.getElementById("KitsuneConfections");
 	MainContent.style.width = "100%";
-	MainContent.style.margin = "-8px -8px 0px -8px";
-	MainContent.style.backgroundImage = "linear-gradient(to bottom right, rgb(10, 10, 10), rgb(70, 70, 70))";
 	
 	//  Load the default first page users should see
 	LoadPage(new MainPage());

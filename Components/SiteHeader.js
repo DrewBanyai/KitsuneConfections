@@ -7,9 +7,8 @@ class SiteHeader {
 		let container = document.createElement("div");
 		container.id = "SiteHeader";
 		container.style.width = "100%";
-		container.style.height = "80px";
+		container.style.height = `${SiteHeader.GetHeight()}px`;
 		container.style.backgroundImage = "linear-gradient(to right, rgb(255, 99, 0), rgb(255, 165, 0))";
-		container.style.marginBottom = "5px";
 		
 		let contentContainer = document.createElement("div");
 		contentContainer.id = "ContentContainer";
@@ -34,4 +33,6 @@ class SiteHeader {
 		
 		return container;
 	}
+	
+	static GetHeight() { return 80; }
 }

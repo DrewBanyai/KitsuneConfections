@@ -4,16 +4,24 @@ class MainPage {
 	}
 	
 	GenerateContent() {
+		let marginTop = `${(SiteHeader.GetHeight() + 15)}px`;
+		
 		let container = document.createElement("div");
 		container.id = "MainPageContainer";
+		container.style.width = "100%";
+		container.style.position = "relative";
+		container.style.top = `${SiteHeader.GetHeight()}`;
+		container.style.backgroundImage = "linear-gradient(to bottom right, rgb(10, 10, 10), rgb(70, 70, 70))";
 		
 		let siteHeader = new SiteHeader();
 		container.appendChild(siteHeader.content);
 		
 		let pageContent = document.createElement("div");
 		pageContent.id = "PageContent";
-		pageContent.style.margin = "15px auto 15px";
+		pageContent.style.margin = "15px auto";
 		pageContent.style.width = SiteWidth;
+		pageContent.style.minHeight = "700px";
+		
 		container.appendChild(pageContent);
 		
 		let foodItemList = new FoodItemList(3, SiteWidth);
