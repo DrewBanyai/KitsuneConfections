@@ -34,6 +34,10 @@ class MainPage {
 		foodItemList.AddFoodItem("Images/ProductPreviews/PokeballCakepops_01.png", "Pokeball Cakepops", 2199);
 		pageContent.appendChild(foodItemList.content);
 		
+		let shoppingCartDisplay = new ShoppingCartDisplay();
+		shoppingCartDisplay.content.style.display = "none";
+		pageContent.appendChild(shoppingCartDisplay.content);
+		
 		let siteFooter = new SiteFooter();
 		container.appendChild(siteFooter.content);
 		

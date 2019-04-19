@@ -7,6 +7,7 @@ class ShoppingCartDisplayEntry {
 		this.TotalPriceLabel = null;
 		this.PreviewImageURL = previewImageURL;
 		this.UpdateCallback = null;
+		this.ShoppingListUpdate = null;
 		this.content = this.GenerateContent();
 	}
 	
@@ -60,12 +61,7 @@ class ShoppingCartDisplayEntry {
 		countInput.style.marginTop = centerMargin;
 		countInput.style.marginRight = "10px";
 		countInput.onclick = () => countInput.onchange();
-		countInput.onchange = () => {
-			if (this.ItemCount === countInput.value) { return; }
-			SetShoppingCartItemCount(this.ItemName, parseInt(countInput.value));
-			this.SetItemCount(countInput.value);
-			if (container.ShoppingListCheck !== undefined) { container.ShoppingListCheck(); }
-		};
+		countInput.onchange = () => { this.SetItemCount(countInput.value); };
 		container.appendChild(countInput);
 		
 		let removeItemButton = new PrimaryButton("RemoveItem", "REMOVE ITEM", "'Titillium Web', sans-serif", "10px", "span");
@@ -73,11 +69,7 @@ class ShoppingCartDisplayEntry {
 		removeItemButton.content.style.height = "25px";
 		removeItemButton.content.style.cursor = "pointer";
 		removeItemButton.content.style.marginTop = centerMargin;
-		removeItemButton.content.onclick = () => { 
-			this.ItemCount = 0;
-			SetShoppingCartItemCount(this.ItemName, parseInt(this.ItemCount));
-			LoadPage(new ShoppingCartPage());
-		};
+		removeItemButton.content.onclick = () => { this.SetItemCount(0); };
 		container.appendChild(removeItemButton.content);
 		
 		this.TotalPriceLabel = new Label("ItemName", GetPriceString(this.ItemPrice * this.ItemCount), "'Ubuntu', sans-serif", "18px", "span");
@@ -96,8 +88,12 @@ class ShoppingCartDisplayEntry {
 	GetItemCount() { return this.ItemCount; }
 	
 	SetItemCount(count) {
+		if (this.ItemCount === count) { return; }
+		
 		this.ItemCount = count;
 		this.SetItemTotalPrice();
+		SetShoppingCartItemCount(this.ItemName, parseInt(this.ItemCount));
+		if (this.ShoppingListUpdate !== null) { this.ShoppingListUpdate((count == 0)); }
 	}
 	
 	SetItemTotalPrice() {

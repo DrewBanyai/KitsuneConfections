@@ -10,41 +10,11 @@ class GooglePay {
 	GenerateContent() {
 		let container = document.createElement("div");
 		container.id = "GooglePayButtonContainer";
-	
-		//  Create a function to check if the payment system is ready
-		let paymentReadyCheck = () => {
-			if (GooglePaymentsClient === null) return false;
-			const isReadyToPayRequest = Object.assign({}, this.GetBaseRequest()); isReadyToPayRequest.allowedPaymentMethods = [this.GetBaseCardPaymentMethod()];
-			GooglePaymentsClient.isReadyToPay(isReadyToPayRequest).then(function(response) {
-					return (response.result != null);
-				}).catch(function(err) {
-					// show error in developer console for debugging
-					console.error(err);
-					return false;
-				});
-		}
 		
-		//  Check if the payment system is ready, and set an interval to keep checking if it is not. Create a button to pay when the system is ready.
-		if (paymentReadyCheck() === false) {
-			let paymentReadyCheckLoop = setInterval(() => {
-				if (paymentReadyCheck() === true) {
-					clearInterval(paymentReadyCheckLoop);
-					
-					// add a Google Pay payment button
-					this.GooglePayButton = GooglePaymentsClient.createButton({onClick: () => container.PayButtonCallback()});
-					this.GooglePayButton.id = "GooglePayButton";
-					this.GooglePayButton.style.marginTop = "6px";
-					container.appendChild(this.GooglePayButton);
-				}
-			}, 250);
-		}
-		else {
-			// add a Google Pay payment button
-			this.GooglePayButton = GooglePaymentsClient.createButton({onClick: () => container.PayButtonCallback()});
-			this.GooglePayButton.id = "GooglePayButton";
-			this.GooglePayButton.style.marginTop = "6px";
-			container.appendChild(this.GooglePayButton);
-		}
+		this.GooglePayButton = document.createElement("div");
+		container.appendChild(this.GooglePayButton);
+		
+		this.WaitForPaymentReady();
 		
 		container.PayButtonCallback = () => this.PayButtonCallback();
 		
@@ -63,8 +33,44 @@ class GooglePay {
 	
 	SetPaymentPrice(price) {
 		this.PaymentPrice = price;
-		this.GooglePayButton.style.display = (price == 0) ? "none" : "block";
-		if (price !== 0) { this.PrefetchPaymentRequest(); }
+		this.GooglePayButton.style.display = (this.PaymentPrice == 0) ? "none" : "block";
+		if (this.PaymentPrice !== 0) { this.PrefetchPaymentRequest(); }
+	}
+	
+	async WaitForPaymentReady() {
+		//  Create a function to check if the payment system is ready
+		let paymentReadyCheck = async () => {
+			if (GooglePaymentsClient === null) return false;
+			const isReadyToPayRequest = Object.assign({}, this.GetBaseRequest()); isReadyToPayRequest.allowedPaymentMethods = [this.GetBaseCardPaymentMethod()];
+			let response = await GooglePaymentsClient.isReadyToPay(isReadyToPayRequest);
+			return (response.result != null);
+		}
+		
+		//  Check if the payment system is ready, and set an interval to keep checking if it is not. Create a button to pay when the system is ready.
+		let paymentReady = await paymentReadyCheck();
+		if (paymentReady === false) {
+			let paymentReadyCheckLoop = setInterval(async () => {
+				if ((await paymentReadyCheck()) === true) {
+					clearInterval(paymentReadyCheckLoop);
+					
+					// add a Google Pay payment button
+					let googlePayButton = GooglePaymentsClient.createButton({onClick: () => this.PayButtonCallback()});
+					googlePayButton.id = "GooglePayButton";
+					googlePayButton.style.marginTop = "6px";
+					this.GooglePayButton.innerHTML = "";
+					this.GooglePayButton.appendChild(googlePayButton);
+				}
+			}, 250);
+		}
+		else {
+			console.log("Payment Ready");
+			// add a Google Pay payment button
+			let googlePayButton = GooglePaymentsClient.createButton({onClick: () => this.PayButtonCallback()});
+			googlePayButton.id = "GooglePayButton";
+			googlePayButton.style.marginTop = "6px";
+			this.GooglePayButton.innerHTML = "";
+			this.GooglePayButton.appendChild(googlePayButton);
+		}
 	}
 	
 	async PayButtonCallback() {

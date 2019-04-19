@@ -12,8 +12,12 @@ class FoodItemList {
 		let container = document.createElement("div");
 		container.id = "FoodItemList";
 		
+		container.SetVisible = (visible) => this.SetVisible(visible);
+		
 		return container;
 	}
+	
+	SetVisible(visible) { this.content.style.display = (visible ? "block" : "none"); }
 	
 	AddNewRow() {
 		let rowContainer = document.createElement("div");

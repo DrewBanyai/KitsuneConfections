@@ -1,9 +1,10 @@
 class Label {
-	constructor(name, text, font, size, divType) {
+	constructor(name, text, font, size, divType, userSelect = "none") {
 		this.LabelName = name;
 		this.LabelElement = null;
 		this.DivType = (divType !== undefined) ? divType : "span";
 		this.content = this.GenerateContent();
+		this.content.style.userSelect = userSelect;
 		this.SetText(text);
 		this.SetFont(font);
 		this.SetFontSize(size);

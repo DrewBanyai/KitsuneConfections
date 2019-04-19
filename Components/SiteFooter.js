@@ -19,15 +19,23 @@ class SiteFooter {
 		contentContainer.style.justifyContent = "space-between";
 		container.appendChild(contentContainer);
 		
-		let siteTitleLabel = new Label("SiteTitle", SiteName, "'Titillium Web', sans-serif", "28px");
+		let siteTitleLabel = new Label("SiteTitle", SiteName, "'Titillium Web', sans-serif", "28px", "span", "none");
 		siteTitleLabel.content.style.color = "rgb(200, 200, 200)";
 		siteTitleLabel.content.style.position = "relative";
 		siteTitleLabel.content.style.top = "20px";
 		siteTitleLabel.content.style.cursor = "pointer";
-		siteTitleLabel.content.onclick = () => { LoadPage(new MainPage()); };
+		siteTitleLabel.content.onclick = () => { this.LoadFoodItemList(); };
 		contentContainer.appendChild(siteTitleLabel.content);
 		
 		return container;
+	}
+	
+	LoadFoodItemList() {
+		let foodItemList = document.getElementById("FoodItemList");
+		if (foodItemList !== null) { foodItemList.SetVisible(true); }
+		
+		let shoppingCartDisplay = document.getElementById("ShoppingCartDisplay");
+		if (shoppingCartDisplay !== null) { shoppingCartDisplay.SetVisible(false); }
 	}
 	
 	static GetHeight() { return 80; }

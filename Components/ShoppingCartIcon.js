@@ -24,9 +24,7 @@ class ShoppingCartIcon {
 		shoppingCartImage.style.alignContent = "center";
 		shoppingCartImage.style.textAlign = "center";
 		shoppingCartImage.style.display = "inline-grid";
-		shoppingCartImage.onclick = () => {
-			LoadPage(new ShoppingCartPage());
-		};
+		shoppingCartImage.onclick = () => { this.LoadShoppingCart(); };
 		container.appendChild(shoppingCartImage);
 		
 		this.CountTag = document.createElement("div");
@@ -61,5 +59,15 @@ class ShoppingCartIcon {
 	SetItemCount(count) {
 		this.CountLabel.SetText(count);
 		this.CountTag.style.visibility = (count === 0) ? "hidden" : "visible";
+	}
+	
+	LoadShoppingCart() {
+		let foodItemList = document.getElementById("FoodItemList");
+		if (foodItemList !== null) { foodItemList.SetVisible(false); }
+		
+		let shoppingCartDisplay = document.getElementById("ShoppingCartDisplay");
+		if (shoppingCartDisplay !== null) { shoppingCartDisplay.SetVisible(true); }
+		
+		shoppingCartDisplay.UpdateShoppingCartDisplay(true);
 	}
 }
