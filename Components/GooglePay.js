@@ -52,34 +52,35 @@ class GooglePay {
 			let paymentReadyCheckLoop = setInterval(async () => {
 				if ((await paymentReadyCheck()) === true) {
 					clearInterval(paymentReadyCheckLoop);
-					
-					// add a Google Pay payment button
-					let googlePayButton = GooglePaymentsClient.createButton({onClick: () => this.PayButtonCallback()});
-					googlePayButton.id = "GooglePayButton";
-					googlePayButton.style.marginTop = "6px";
-					this.GooglePayButton.innerHTML = "";
-					this.GooglePayButton.appendChild(googlePayButton);
+					this.CreateGooglePayButton();
 				}
 			}, 250);
 		}
-		else {
-			console.log("Payment Ready");
-			// add a Google Pay payment button
-			let googlePayButton = GooglePaymentsClient.createButton({onClick: () => this.PayButtonCallback()});
-			googlePayButton.id = "GooglePayButton";
-			googlePayButton.style.marginTop = "6px";
-			this.GooglePayButton.innerHTML = "";
-			this.GooglePayButton.appendChild(googlePayButton);
-		}
+		else { this.CreateGooglePayButton(); }
+	}
+	
+	CreateGooglePayButton() {
+		let googlePayButton = GooglePaymentsClient.createButton({onClick: () => this.PayButtonCallback()});
+		googlePayButton.id = "GooglePayButton";
+		googlePayButton.style.marginTop = "6px";
+		this.GooglePayButton.innerHTML = "";
+		this.GooglePayButton.appendChild(googlePayButton);
 	}
 	
 	async PayButtonCallback() {
 		//  Load the payment data
-		let paymentData = await GooglePaymentsClient.loadPaymentData(this.PaymentDataRequest).catch(function(error) { console.error(error); });
+		let paymentData = await GooglePaymentsClient.loadPaymentData(this.PaymentDataRequest).catch(function(error) {
+			if ((error === null) || (error.statusCode === null)) { console.error("Unknown error occurred when loading payment data for Google Pay."); return; }
+			switch (error.statusCode) {
+				case "CANCELED": 	{ console.log("Google Pay: Payment canceled"); return; }
+				default:			{ console.error(error); return; }
+			}
+		});
+		if ((paymentData === null) || (paymentData === undefined)) { return; }
 		
 		//  If we're using gateway tokenization, pass this token without modification
 		this.PaymentToken = paymentData.paymentMethodData.tokenizationData.token;
-		console.log(`Payment Token: ${this.PaymentToken}`);
+		console.log(`Payment Successful (Token: ${this.PaymentToken})`);
 	}
 	
 	PrefetchPaymentRequest() {
