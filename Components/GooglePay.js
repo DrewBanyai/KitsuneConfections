@@ -60,7 +60,7 @@ class GooglePay {
 	}
 	
 	CreateGooglePayButton() {
-		let googlePayButton = GooglePaymentsClient.createButton({onClick: () => this.PayButtonCallback()});
+		let googlePayButton = GooglePaymentsClient.createButton({buttonColor: "white", buttonType: "long", onClick: () => this.PayButtonCallback()});
 		googlePayButton.id = "GooglePayButton";
 		googlePayButton.style.marginTop = "6px";
 		this.GooglePayButton.innerHTML = "";
