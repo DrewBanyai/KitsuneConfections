@@ -84,10 +84,19 @@ class ShoppingCartDisplay {
 		this.GooglePay.content.style.width = totalDueTextContainer.offsetWidth;
 		this.TotalDueContainer.appendChild(this.GooglePay.content);
 		
+		//  Set the function to 
+		this.GooglePay.SetSuccessCallback(this.SuccessfulPaymentCallback);
+		
 		container.SetVisible = (visible) => this.SetVisible(visible);
 		container.UpdateShoppingCartDisplay = (rebuild) => this.UpdateShoppingCartDisplay(rebuild);
 		
 		return container;
+	}
+	
+	SuccessfulPaymentCallback(token, price) {
+		console.log("Google Pay: Payment successful!");
+		console.log("Payment token: " + token);
+		console.log("Payment price: " + GetPriceString(price));
 	}
 	
 	SetVisible(visible) { this.content.style.display = (visible ? "block" : "none"); }

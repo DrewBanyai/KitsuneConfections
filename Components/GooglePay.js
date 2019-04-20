@@ -4,6 +4,7 @@ class GooglePay {
 		this.PaymentPrice = 0;
 		this.PaymentDataRequest = null;
 		this.PaymentToken = null;
+		this.SuccessCallback = null;
 		this.content = this.GenerateContent();
 	}
 	
@@ -59,6 +60,9 @@ class GooglePay {
 		else { this.CreateGooglePayButton(); }
 	}
 	
+	//  Note: Callback should take arguments (paymentToken, paymentAmount)
+	SetSuccessCallback(callback) { this.SuccessCallback = callback; }
+	
 	CreateGooglePayButton() {
 		let googlePayButton = GooglePaymentsClient.createButton({buttonColor: "white", buttonType: "long", onClick: () => this.PayButtonCallback()});
 		googlePayButton.id = "GooglePayButton";
@@ -80,7 +84,7 @@ class GooglePay {
 		
 		//  If we're using gateway tokenization, pass this token without modification
 		this.PaymentToken = paymentData.paymentMethodData.tokenizationData.token;
-		console.log(`Payment Successful (Token: ${this.PaymentToken})`);
+		if (this.SuccessCallback != null) { this.SuccessCallback(this.PaymentToken, this.PaymentPrice); }
 	}
 	
 	PrefetchPaymentRequest() {
