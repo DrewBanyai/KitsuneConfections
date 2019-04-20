@@ -38,6 +38,9 @@ class MainPage {
 		shoppingCartDisplay.content.style.display = "none";
 		pageContent.appendChild(shoppingCartDisplay.content);
 		
+		let purchaseCompleteDisplay = new PurchaseCompleteDisplay();
+		pageContent.appendChild(purchaseCompleteDisplay.content);
+		
 		let siteFooter = new SiteFooter();
 		container.appendChild(siteFooter.content);
 		

@@ -24,4 +24,5 @@ class Label {
 	SetText(text) { this.LabelElement.innerHTML = text; }
 	SetFont(font) { this.LabelElement.style.fontFamily = font; }
 	SetFontSize(size) { this.LabelElement.style.fontSize = size; }
+	SetColor(color) { this.LabelElement.style.color = color; }
 }

@@ -97,6 +97,9 @@ class ShoppingCartDisplay {
 		console.log("Google Pay: Payment successful!");
 		console.log("Payment token: " + token);
 		console.log("Payment price: " + GetPriceString(price));
+		
+		let purchaseCompleteDisplay = document.getElementById("PurchaseCompleteDisplay");
+		if (purchaseCompleteDisplay !== null) { purchaseCompleteDisplay.SetVisible(true); }
 	}
 	
 	SetVisible(visible) { this.content.style.display = (visible ? "block" : "none"); }
