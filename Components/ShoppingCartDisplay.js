@@ -68,11 +68,12 @@ class ShoppingCartDisplay {
 		
 		let totalDueLabel = new Label("TotalDue", "Total Due:", "'Ubuntu', sans-serif", "18px", "div", "none");
 		totalDueLabel.content.style.color = "rgb(200, 200, 200)";
+		totalDueLabel.content.style.width = "85px";
 		totalDueTextContainer.appendChild(totalDueLabel.content);
 		
 		this.TotalDueAmountLabel = new Label("TotalDueAmount", "$99.99", "'Ubuntu', sans-serif", "18px", "div", "none");
 		this.TotalDueAmountLabel.content.style.color = "rgb(200, 200, 200)";
-		this.TotalDueAmountLabel.content.style.width = "150px";
+		this.TotalDueAmountLabel.content.style.width = "145px";
 		this.TotalDueAmountLabel.content.style.textAlign = "right";
 		this.TotalDueAmountLabel.content.style.marginRight = "10px";
 		totalDueTextContainer.appendChild(this.TotalDueAmountLabel.content);
